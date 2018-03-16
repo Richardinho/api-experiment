@@ -1,18 +1,21 @@
 import getBooksEndpoint from './google-books-endpoint';
 import _ from 'lodash';
 
+const filterBookResponse = (item) => {
+  const volumeInfo = item.volumeInfo;
+  return {
+    title: volumeInfo.title,
+    author: volumeInfo.authors[0],
+    publisher: volumeInfo.publisher
+  };
 
-const whiteList = [
-  'title',
-  'authors',
-  'description',
-];
+}
 
 function getBooks(subject) {
   return fetch(getBooksEndpoint(subject))
     .then(response => response.json())
-    .then(data => {
-        return data.items.map(item => _.pick(item.volumeInfo, whiteList))
+    .then(data => { 
+      return data.items.map(filterBookResponse);
     });
 }
 

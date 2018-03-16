@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import Rx from 'rxjs/Rx';
 import { getBooks } from './books-service';
 import getGithub from './github-service'; 
-import Rx from 'rxjs/Rx';
-import BooksComponent from './books-component';
+import BooksComponent from './books.component';
 
 export default class App extends Component {
 
@@ -19,18 +19,21 @@ export default class App extends Component {
       .flatMap(books => {
         return Rx.Observable
           .from(books)
-          .mergeMap(book => Rx.Observable.fromPromise(getGithub(book)))
+          .mergeMap(book => Rx.Observable.fromPromise(getGithub(book)), (book, github) => { return { book, github}})
       })
-      .subscribe((data) => {
-        this.setState({
-          items: this.state.items.concat(data)
+      .subscribe(({ book, github}) => {
+        this.setState({ 
+          items: this.state.items.concat({
+            book,
+            github,
+          })
         });
       });
   }
 
   render() {
     return (
-      <BooksComponent books={this.state.items}/>
+      <BooksComponent items={this.state.items}/>
     )
   }
 }

@@ -1,0 +1,23 @@
+.bookContainer {
+  background: pink;
+  padding: 6px;
+}
+.header {
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+.title {
+  line-height: 1.2em;
+  margin-bottom: 6px;
+  font-style: italic;
+  color: blue;
+}
+.book {
+  border: solid 3px orange;
+  padding: 6px;
+  margin-bottom: 6px;
+}
+.bookDetails {
+  padding-bottom: 6px;
+}

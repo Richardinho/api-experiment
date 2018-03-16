@@ -1,19 +1,18 @@
-function getEndpoint(query) {
-  return `https://api.github.com/search/repositories?q=${query}`;
+function getEndpoint(book) {
+  return `https://api.github.com/search/repositories?q=${book}`;
 }
 
 function filterGithubResponse(data) {
-  return {
-    name: data.items[0].full_name
-  }
+  return data.items.slice(0, 4).map(item => {
+    return {
+      name: item.full_name,
+      description: item.description
+    }
+  });
 }
 
-export default query => {
-  return fetch(getEndpoint(query.title))
+export default book => {
+  return fetch(getEndpoint(book.title))
     .then(response => response.json()) 
-    .then(data => ({
-      title: query.title,
-      github: filterGithubResponse(data)
-    }));
-
+    .then(data => filterGithubResponse(data))
 };
