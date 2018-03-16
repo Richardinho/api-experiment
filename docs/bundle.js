@@ -61870,11 +61870,6 @@ var renderRepo = function renderRepo(repo, index) {
     'li',
     { className: _github2.default.repo, key: index },
     _react2.default.createElement(
-      'h2',
-      { className: _github2.default.header },
-      'Github Repositories referencing this book'
-    ),
-    _react2.default.createElement(
       'div',
       null,
       _react2.default.createElement(
@@ -61905,6 +61900,11 @@ exports.default = function (_ref) {
   return _react2.default.createElement(
     'div',
     { className: _github2.default.main },
+    _react2.default.createElement(
+      'h2',
+      { className: _github2.default.header },
+      'Github Repositories referencing this book'
+    ),
     _react2.default.createElement(
       'ul',
       null,
