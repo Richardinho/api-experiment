@@ -1,5 +1,4 @@
 import getBooksEndpoint from './google-books-endpoint';
-import _ from 'lodash';
 
 
 const filterBookResponse = (item) => {
